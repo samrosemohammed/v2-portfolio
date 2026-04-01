@@ -1,12 +1,31 @@
-import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
 import { MaxWidthWrapper } from "@/wrapper/max-width-wrapper";
-import { Navbar } from "@/components/nav-bar";
 import { Footer } from "@/components/footer";
+import { CalendarDays } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { BlogPostsFilter } from "@/components/blog-posts-filter";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Blog | mdsamrose.dev",
-  description: "Thoughts, tutorials, and writing.",
+export const metadata: Metadata = {
+  title: "Blog",
+  description:
+    "Software engineering, AI, architecture, and practical development guides from Mohammed Samrose.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "Blog | mdsamrose.dev",
+    description:
+      "Software engineering, AI, architecture, and practical development guides from Mohammed Samrose.",
+    url: "/blog",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | mdsamrose.dev",
+    description:
+      "Software engineering, AI, architecture, and practical development guides from Mohammed Samrose.",
+  },
 };
 
 export default function BlogPage() {
@@ -15,38 +34,31 @@ export default function BlogPage() {
   return (
     <MaxWidthWrapper>
       <main className="py-12">
-        <h1 className="text-2xl font-semibold tracking-tight mb-8">Blog</h1>
+        <section className="mb-10 space-y-4">
+          <Badge variant="secondary" className="w-max uppercase">
+            journal
+          </Badge>
 
-        {posts.length === 0 ? (
-          <p className="text-muted-foreground">No posts yet. Coming soon!</p>
-        ) : (
-          <ul className="flex flex-col gap-6">
-            {posts.map((post) => (
-              <li key={post.slug}>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="group block space-y-1"
-                >
-                  <div className="flex items-center justify-between gap-4">
-                    <h2 className="text-base font-medium group-hover:underline underline-offset-4">
-                      {post.title}
-                    </h2>
-                    <time className="text-sm text-muted-foreground shrink-0">
-                      {new Date(post.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </time>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    {post.description}
-                  </p>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+          <div className="space-y-2">
+            <h1 className="text-3xl font-bold tracking-[-0.02em] sm:text-4xl">
+              Blog
+            </h1>
+            <p className="max-w-2xl text-muted-foreground">
+              Thoughts, practical guides, and system-level lessons from building
+              software products.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+            <span className="inline-flex items-center gap-1.5">
+              <CalendarDays size={14} />
+              Updated regularly
+            </span>
+            <span>{posts.length} published posts</span>
+          </div>
+        </section>
+
+        <BlogPostsFilter posts={posts} />
       </main>
       <Footer />
     </MaxWidthWrapper>

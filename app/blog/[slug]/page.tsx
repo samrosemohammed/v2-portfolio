@@ -4,6 +4,7 @@ import { Navbar } from "@/components/nav-bar";
 import { Footer } from "@/components/footer";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import type { Metadata } from "next";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -14,13 +15,29 @@ export async function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const { slug } = await params;
     const post = getPostBySlug(slug);
+
     return {
-      title: `${post.title} | mdsamrose.dev`,
+      title: post.title,
       description: post.description,
+      alternates: {
+        canonical: `/blog/${slug}`,
+      },
+      openGraph: {
+        title: post.title,
+        description: post.description,
+        url: `/blog/${slug}`,
+        type: "article",
+        publishedTime: new Date(post.date).toISOString(),
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: post.title,
+        description: post.description,
+      },
     };
   } catch {
     return {};
