@@ -121,7 +121,7 @@ export function AssistantChat() {
   const isEmptyChat = messages.length === 0;
 
   return (
-    <div className="relative flex flex-col h-160 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+    <div className="relative flex h-[72vh] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm sm:h-160">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-linear-to-b from-primary/10 to-transparent" />
 
       <div className="relative flex items-center justify-between border-b border-border px-4 py-3">
