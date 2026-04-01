@@ -3,7 +3,10 @@ import Link from "next/link";
 import { Github } from "lucide-react";
 import { Button } from "./ui/button";
 
-const navLinks = [{ label: "Blog", href: "/blog" }];
+const navLinks = [
+  { label: "Blog", href: "/blog" },
+  { label: "Assistant", href: "/assistant" },
+];
 
 export const Navbar = () => {
   return (
@@ -20,20 +23,25 @@ export const Navbar = () => {
         <span className="text-muted-foreground font-normal">.dev</span>
       </Link>
 
-      <div className="flex items-center gap-2">
-        <ul className="flex gap-4">
+      <div className="flex items-center gap-1 sm:gap-2">
+        <ul className="flex gap-2 sm:gap-4">
           {navLinks.map(({ label, href }) => (
             <li key={href}>
               <Link
                 href={href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="text-xs sm:text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
               >
                 {label}
               </Link>
             </li>
           ))}
         </ul>
-        <Button asChild variant="outline" size="icon">
+        <Button
+          asChild
+          variant="outline"
+          size="icon"
+          className="h-8 w-8 sm:h-9 sm:w-9"
+        >
           <Link
             href="https://github.com/samrosemohammed"
             target="_blank"
@@ -41,7 +49,7 @@ export const Navbar = () => {
             aria-label="Open GitHub profile"
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
-            <Github />
+            <Github className="h-4 w-4" />
           </Link>
         </Button>
 
