@@ -3,7 +3,10 @@ import Link from "next/link";
 import { Github } from "lucide-react";
 import { Button } from "./ui/button";
 
-const navLinks = [{ label: "Blog", href: "/blog" }];
+const navLinks = [
+  { label: "Blog", href: "/blog" },
+  { label: "Assistant", href: "/assistant" },
+];
 
 export const Navbar = () => {
   return (
