@@ -1,6 +1,5 @@
 import { getPostBySlug, getAllPosts } from "@/lib/blog";
 import { MaxWidthWrapper } from "@/wrapper/max-width-wrapper";
-import { Navbar } from "@/components/nav-bar";
 import { Footer } from "@/components/footer";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";

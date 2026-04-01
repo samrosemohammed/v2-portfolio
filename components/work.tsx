@@ -164,7 +164,7 @@ export function Work() {
         </Badge>
         <h1 className="text-3xl font-bold tracking-[-0.02em]">Work</h1>
         <p className="text-muted-foreground text-sm sm:text-base max-w-lg">
-          A selection of projects I've built — from SaaS tools to internal
+          A selection of projects I&apos;ve built — from SaaS tools to internal
           platforms.
         </p>
       </div>
