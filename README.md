@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mohammed Samrose Portfolio (v2)
 
-## Getting Started
+Personal portfolio built with Next.js 16, featuring:
 
-First, run the development server:
+- A home page with experience timeline, tech stack, selected work, and contact section
+- A markdown-powered blog with tag filtering and dynamic post pages
+- A streaming AI assistant page backed by OpenRouter
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Tech Stack
+
+- Framework: Next.js 16 (App Router), React 19, TypeScript
+- Styling: Tailwind CSS v4, shadcn/ui primitives, lucide-react icons
+- Content: Markdown + gray-matter + MDX rendering
+- AI: OpenAI SDK pointed to OpenRouter chat completions API
+- Theme: next-themes (light/dark/system)
+
+## Project Structure
+
+```text
+app/
+	page.tsx                   # Home page
+	assistant/page.tsx         # AI assistant UI page
+	api/assistant/route.ts     # Streaming assistant endpoint
+	blog/page.tsx              # Blog index
+	blog/[slug]/page.tsx       # Blog post page
+components/
+	assistant-chat.tsx         # Assistant chat orchestration
+	blog-posts-filter.tsx      # Blog filtering UI
+content/blog/                # Markdown posts
+lib/
+	ai.ts                      # OpenRouter client + system prompt
+	blog.ts                    # Markdown post loader
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. Install dependencies
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This repo includes a `pnpm-lock.yaml`, so `pnpm` is recommended.
 
-## Learn More
+```bash
+pnpm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Configure environment variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create a local env file named `.env.local`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Linux/macOS
+touch .env.local
+```
 
-## Deploy on Vercel
+Add/update these values in `.env.local`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+OPENROUTER_API_KEY=your_openrouter_api_key
+OPENROUTER_MODEL=meta-llama/llama-2-7b-chat
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Notes:
+
+- `OPENROUTER_API_KEY` is required for `/assistant`.
+- `OPENROUTER_MODEL` is optional. If omitted, it falls back to `meta-llama/llama-2-7b-chat`.
+
+### 3. Run the app
+
+```bash
+pnpm dev
+```
+
+Open `http://localhost:3000`.
+
+## Available Scripts
+
+- `pnpm dev` - Start local development server
+- `pnpm build` - Create production build
+- `pnpm start` - Start production server
+- `pnpm lint` - Run ESLint
+
+## Blog Workflow
+
+Blog posts live in `content/blog/*.md` and are loaded at build/runtime via `lib/blog.ts`.
+
+Each markdown file should include frontmatter like:
+
+```md
+---
+title: "Post title"
+date: "2026-04-10"
+description: "Short summary"
+tags: ["nextjs", "ai"]
+---
+```
+
+Then add markdown content below the frontmatter.
+
+## AI Assistant Flow
+
+1. UI in `components/assistant-chat.tsx` sends conversation messages to `POST /api/assistant`.
+2. `app/api/assistant/route.ts` validates input and creates a streaming completion request.
+3. `lib/ai.ts` injects a portfolio-specific system prompt and configures the OpenRouter client.
+4. The response stream is forwarded back to the client and rendered incrementally.
+
+## Deployment
+
+The app is standard Next.js and can be deployed to Vercel or any Node-compatible platform.
+
+Before deploying, ensure:
+
+- `OPENROUTER_API_KEY` is set in your hosting environment
+- Optional `OPENROUTER_MODEL` is set if you want a model different from the default
+- `pnpm build` passes successfully
+
+## License
+
+Personal portfolio project by Mohammed Samrose.
