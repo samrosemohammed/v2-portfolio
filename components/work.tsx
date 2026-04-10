@@ -22,6 +22,25 @@ const STATUS_VARIANT: Record<ProjectStatus, "secondary" | "outline"> = {
 
 const PROJECTS: Project[] = [
   {
+    title: "create-samrose-app",
+    description:
+      "An opinionated CLI to scaffold modern Next.js apps instantly. Configure your full stack — ORM, database, auth, state management, API layer, and more — interactively, without any boilerplate headaches.",
+    tags: [
+      "CLI",
+      "Node.js",
+      "TypeScript",
+      "Next.js",
+      "Prisma",
+      "Drizzle",
+      "NextAuth",
+      "tRPC",
+      "oRPC",
+    ],
+    liveUrl: "https://csa.mohammedsamrose.com.np",
+    githubUrl: "https://github.com/samrosemohammed/create-samrose-app",
+    status: "Live",
+  },
+  {
     title: "GrabTheFund",
     description:
       "Finding the right funding shouldn't be hard. GrabTheFund brings grants opportunities into one place — so you can focus on applying, not searching.",
