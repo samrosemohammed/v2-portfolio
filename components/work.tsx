@@ -22,6 +22,25 @@ const STATUS_VARIANT: Record<ProjectStatus, "secondary" | "outline"> = {
 
 const PROJECTS: Project[] = [
   {
+    title: "Bill OCR",
+    description:
+      "Turns photos of Nepali and English paper bills into clean, structured data. An AI vision model reads each bill, Nepali numerals and Bikram Sambat dates are normalized, and you review, confirm and export records to CSV. Built for accountants and small businesses who still type bills in by hand.",
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL",
+      "Generative AI",
+      "Better Auth",
+      "Zod",
+      "shadcn/ui",
+      "Tailwind",
+    ],
+    liveUrl: "https://bill.mohammedsamrose.com.np",
+    githubUrl: "https://github.com/samrosemohammed/bill-ocr",
+    status: "Live",
+  },
+  {
     title: "create-samrose-app",
     description:
       "An opinionated CLI to scaffold modern Next.js apps instantly. Configure your full stack — ORM, database, auth, state management, API layer, and more — interactively, without any boilerplate headaches.",
